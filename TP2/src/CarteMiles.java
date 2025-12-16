@@ -27,19 +27,11 @@ public class CarteMiles extends CarteClient {
     // Redéfinition de la méthode recompenser(Facture f) pour récompenser le client avec des miles basés sur une facture
     @Override
     public void recompenser(Facture f) { 
-        float milesGagnes = 0; // Initialisation des miles gagnés à 0
+        // Obtenir le taux de récompense de la stratégie de paiement via une méthode de l'interface StrategiePaiement
+        double tauxMiles = f.getStrategiePaiement().obtenirTauxMiles();
         
-        // Calculer les miles selon la stratégie de paiement
-        if (f.getStrategiePaiement() instanceof PaiementEspeces) { // si la stratégie de paiement de Facture est une instance de PaiementEspeces
-            // les miles valent la moitié du montant dépensé en espèces
-            milesGagnes = (float) (f.getMontant() / 2);
-        } else if (f.getStrategiePaiement() instanceof PaiementDebit) { // sinon si la stratégie de paiement de Facture est une instance de PaiementDebit
-            // les miles valent le montant dépensé en débit
-            milesGagnes = (float) (f.getMontant() * 1);
-        } else if (f.getStrategiePaiement() instanceof PaiementCredit) { // sinon si la stratégie de paiement de Facture est une instance de PaiementCredit
-            // les miles valent le double du montant dépensé en crédit
-            milesGagnes = (float) (f.getMontant() * 2);
-        }
+        // Calculer les miles gagnés en multipliant le montant par le taux
+        float milesGagnes = (float) (f.getMontant() * tauxMiles);
         
         // ajouterMiles est une méthode de la classe CarteMiles qui ajoute les miles gagnés au nombre actuel de miles
         ajouterMiles(milesGagnes);

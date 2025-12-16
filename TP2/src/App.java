@@ -1,16 +1,3 @@
-/*** À LIRE ***
-En lisant le TP j'ai vu ça :
-4)	Refaire la conception en respectant les principes Solid et en utilisant le patron de conception 
-«Stratégie». 
-5)	Implémentez la nouvelle conception en utilisant java. 
-6)	Proposez un autre patron de conception (différent de « Stratégie ») qui pourrait améliorer la 
-conception globale de ce système de fidélisation.
-
-Donc je crois qu'il faut en premier utiliser le patron Strategy et après un autre patron de 
-conception comme Factory
-*/
-
-// Classe principale pour démontrer le programme de fidélisation
 public class App {
     public static void main(String[] args) {
 
@@ -87,48 +74,3 @@ public class App {
     }
 }
 
-
-/*
-Questions :
-1)	La définition de la fonction récompenser(facture f) des cartes clients n’est pas la responsabilité de la carte client. 
-Quel est le principe (parmi les principes SOLID) qui a été violé ? 
-Le principe de responsabilité unique (Single Responsibility Principle - SRP) a été violé. Selon ce principe, 
-une classe ne doit avoir qu'une seule raison de changer, c'est-à-dire qu'elle doit se concentrer sur une seule 
-responsabilité. En définissant la fonction récompenser(facture f) dans la classe carte client, on mélange la 
-responsabilité de gestion des récompenses avec celle de la gestion des informations du client, ce qui complique 
-la maintenance et l'évolution du code.
-
-
-
-
-
-2)	La récompense telle qu’elle a été définit, elle dépend du mode de payement et d’une instance de la classe facture. Quel est le principe qui a été violé et pourquoi ? 
-
-
-
-
-
-
-3)	Si vous déplacez la définition de la récompensassions des carte clients dans la carte facture, vous allez violer un des principes SOLID. Lequel ? 
-
-
-
-
-
-
-
-
-4)	Refaire la conception en respectant les principes Solid et en utilisant le patron de conception «Stratégie». 
-5)	Implémentez la nouvelle conception en utilisant java. 
-6)	Proposez un autre patron de conception (différent de « Stratégie ») qui pourrait améliorer la conception globale de ce système de fidélisation.
-
-Pour le patron choisi :
-a) Nommez le patron et décrivez en quelques phrases le problème de conception qu’il permettrait de résoudre dans ce contexte (par exemple : création d’objets, extension des types de cartes, combinaison de plusieurs comportements, etc.).
-b) Expliquez comment vous l’intégreriez dans votre modèle :
-•	quelles classes existantes seraient impactées ;
-•	quelles nouvelles classes ou interfaces seraient ajoutées ;
-•	quelles responsabilités seraient déplacées ou mieux isolées.
-c) Donnez un exemple concret d’évolution du système (par exemple : ajout d’un nouveau type de carte, d’une règle de récompense spéciale pour certaines périodes, d’un nouveau moyen de paiement, etc.) et expliquez en quoi l’utilisation de ce patron rend cette évolution plus simple et plus conforme aux principes SOLID.
-d) Discutez brièvement des limites ou des coûts de ce patron dans ce contexte 
-
-*/ 

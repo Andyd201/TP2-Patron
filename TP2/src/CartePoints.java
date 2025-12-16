@@ -36,19 +36,11 @@ public class CartePoints extends CarteClient {
     // Redéfinition de la méthode recompenser(Facture f) pour récompenser le client avec des points de fidélité basés sur une facture
     @Override
     public void recompenser(Facture f) {
-        int pointsGagnes = 0; // Initialisation des points gagnés à 0
+        // Obtenir le taux de récompense de la stratégie de paiement via une méthode de l'interface StrategiePaiement
+        double tauxPoints = f.getStrategiePaiement().obtenirTauxPoints();
         
-        // Calculer les points selon la stratégie de paiement
-        if (f.getStrategiePaiement() instanceof PaiementEspeces) { // si la stratégie de paiement de Facture est une instance de PaiementEspeces
-            // les points vaut 1 point pour 1$ dépensé en espèces
-            pointsGagnes = (int) (f.getMontant() * 1);
-        } else if (f.getStrategiePaiement() instanceof PaiementDebit) { // sinon si la stratégie de paiement de Facture est une instance de PaiementDebit
-            // les points vaut 1.5 points pour 1$ dépensé en débit
-            pointsGagnes = (int) (f.getMontant() * 1.5);
-        } else if (f.getStrategiePaiement() instanceof PaiementCredit) { // sinon si la stratégie de paiement de Facture est une instance de PaiementCredit
-            // les points vaut 2 points pour 1$ dépensé en crédit
-            pointsGagnes = (int) (f.getMontant() * 2);
-        }
+        // Calculer les points gagnés en multipliant le montant par le taux
+        int pointsGagnes = (int) (f.getMontant() * tauxPoints);
         
         // ajouterPoints est une méthode de la classe CartePoints qui ajoute les points gagnés au nombre actuel de points
         ajouterPoints(pointsGagnes);
