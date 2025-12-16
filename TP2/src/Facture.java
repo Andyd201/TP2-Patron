@@ -1,16 +1,18 @@
-// BigDecimal vient permettre de gérer les valeurs monétaires avec précision évitant les erreurs d'arrondi avec les float et double.
-import java.math.BigDecimal;
-
 // Création de la classe Facture qui sert à gérer les paiements et les cartes clients (classe contexte avec laquelle on délègue pour éviter de surcharger les classes de paiement)
 public class Facture {
     // Attributs privés pour la carte client, le montant et la stratégie de paiement
     private CarteClient carte; // vient de la classe CarteClient
-    private BigDecimal montant;
+    private double montant;
     private StrategiePaiement strategiePaiement; // vient de l'interface StrategiePaiement
 
     /*** IL FAUT PLUSIEURS CONSTRUCTEURS POUR GÉRER LES CAS AVEC OU SANS CARTE CLIENT ***/
     // Constructeur 1: Sans carte client de fidélité (injection de dépendance de l'interface StrategiePaiement uniquement)
-    public Facture(BigDecimal montant, StrategiePaiement strategiePaiement) {
+    public Facture(double montant, StrategiePaiement strategiePaiement) {
+        // si la stratégie de paiement est une instance de PaiementPoint, on lance une exception car une carte client est nécessaire pour ce type de paiement
+        if (strategiePaiement instanceof PaiementPoint) {
+            throw new IllegalArgumentException("Le paiement par point nécessite une carte client.");
+        }
+        
         // Initialisation des attributs
         this.montant = montant;
         this.strategiePaiement = strategiePaiement;
@@ -25,7 +27,7 @@ public class Facture {
     }
 
     // Constructeur 2: Avec carte client de fidélité (injection de dépendance de l'interface StrategiePaiement et de la classe CarteClient)
-    public Facture(BigDecimal montant, StrategiePaiement strategiePaiement, CarteClient carte) {
+    public Facture(double montant, StrategiePaiement strategiePaiement, CarteClient carte) {
         // Initialisation des attributs
         this.montant = montant;
         this.strategiePaiement = strategiePaiement;
@@ -65,7 +67,7 @@ public class Facture {
     }
 
     // getters pour obtenir le montant car cet attribut est privé
-    public BigDecimal getMontant() {
+    public double getMontant() {
         return montant;
     }
 
@@ -80,7 +82,7 @@ public class Facture {
     }
 
     // setter pour modifier le montant car cet attribut est privé
-    public void setMontant(BigDecimal montant) {
+    public void setMontant(double montant) {
         this.montant = montant;
     }
 

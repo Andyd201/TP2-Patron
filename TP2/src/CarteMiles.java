@@ -1,6 +1,3 @@
-// BigDecimal vient permettre de gérer les valeurs monétaires avec précision évitant les erreurs d'arrondi avec les float et double.
-import java.math.BigDecimal;
-
 // Création de la classe CarteMiles qui hérite de la classe abstraite CarteClient pour les cartes Air Miles
 public class CarteMiles extends CarteClient {
     // Attribut privé pour le nombre de miles en float
@@ -34,14 +31,14 @@ public class CarteMiles extends CarteClient {
         
         // Calculer les miles selon la stratégie de paiement
         if (f.getStrategiePaiement() instanceof PaiementEspeces) { // si la stratégie de paiement de Facture est une instance de PaiementEspeces
-            // alors les miles gagnés sont calculés en fonction du montant dépensé en espèces (1 mile par 20$ dépensés)
-            milesGagnes = f.getMontant().floatValue() / 20;
+            // les miles valent la moitié du montant dépensé en espèces
+            milesGagnes = (float) (f.getMontant() / 2);
         } else if (f.getStrategiePaiement() instanceof PaiementDebit) { // sinon si la stratégie de paiement de Facture est une instance de PaiementDebit
-            // alors les miles gagnés sont calculés en fonction du montant dépensé par débit (1 mile par 15$ dépensés)
-            milesGagnes = f.getMontant().floatValue() / 15;
+            // les miles valent le montant dépensé en débit
+            milesGagnes = (float) (f.getMontant() * 1);
         } else if (f.getStrategiePaiement() instanceof PaiementCredit) { // sinon si la stratégie de paiement de Facture est une instance de PaiementCredit
-            // alors les miles gagnés sont calculés en fonction du montant dépensé par crédit (1 mile par 10$ dépensés)
-            milesGagnes = f.getMontant().floatValue() / 10;
+            // les miles valent le double du montant dépensé en crédit
+            milesGagnes = (float) (f.getMontant() * 2);
         }
         
         // ajouterMiles est une méthode de la classe CarteMiles qui ajoute les miles gagnés au nombre actuel de miles
@@ -49,9 +46,9 @@ public class CarteMiles extends CarteClient {
         System.out.println("Récompense: " + milesGagnes + " miles ajoutés. Total: " + nombre_mile + " miles.");
     }
 
-    // Redéfinition de la méthode recompenser(BigDecimal points) pour récompenser le client avec des miles basés sur un montant de points
+    // Redéfinition de la méthode recompenser(double montant) pour récompenser le client avec des miles basés sur un montant
     @Override
-    public void recompenser(BigDecimal points) {
-        ajouterMiles(points.floatValue()); // ajoute les points (convertis en float) au nombre actuel de miles
+    public void recompenser(double montant) {
+        ajouterMiles((float) montant); // ajoute le montant (converti en float) au nombre actuel de miles
     }
 }

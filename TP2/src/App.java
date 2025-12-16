@@ -10,9 +10,6 @@ Donc je crois qu'il faut en premier utiliser le patron Strategy et après un aut
 conception comme Factory
 */
 
-// BigDecimal vient permettre de gérer les valeurs monétaires avec précision évitant les erreurs d'arrondi avec les float et double.
-import java.math.BigDecimal;
-
 // Classe principale pour démontrer le programme de fidélisation
 public class App {
     public static void main(String[] args) {
@@ -27,8 +24,8 @@ public class App {
 
         // création de l'instance de la classe Facture avec pour stratégie de paiement PaiementEspeces
         System.out.println("*** Client sans carte - paiement espèces ***");
-        BigDecimal montant1 = new BigDecimal("74.00"); 
-        Facture facture1 = new Facture(montant1, paiementEspeces); // on injecte à facture1 BigDecimal montant1 et la stratégie de paiement paiementEspeces
+        double montant1 = 74.00; 
+        Facture facture1 = new Facture(montant1, paiementEspeces); // on injecte à facture1 le montant et la stratégie de paiement paiementEspeces
         System.out.println();
 
         //======================= AVEC LE CONSTRUCTEUR 2 DE LA CLASSE FACTURE ( FACTURES POUR ANDY) =======================
@@ -36,20 +33,20 @@ public class App {
         // création de l'instance de la classe Facture avec pour stratégie de paiement PaiementEspeces et une carte Air Miles
         System.out.println("*** Client avec carte Air Miles - paiement espèces ***");
         CarteMiles carteAndy = new CarteMiles("Andy Douangpanya", "4356, boulevard Pie-IX, Montréal"); // création de la carte de fidélité Air Miles pour Andy
-        BigDecimal montant2 = new BigDecimal("23.00"); // création du montant de la facture
-        Facture facture2 = new Facture(montant2, paiementEspeces, carteAndy); // on injecte à facture2 BigDecimal montant2, la stratégie de paiement paiementEspeces et la carte de fidélité carteAndy
+        double montant2 = 23.00; // création du montant de la facture
+        Facture facture2 = new Facture(montant2, paiementEspeces, carteAndy); // on injecte à facture2 le montant, la stratégie de paiement paiementEspeces et la carte de fidélité carteAndy
         System.out.println();
 
         // Création de l'instance de la classe Facture avec pour stratégie de paiement PaiementDebit et une carte Air Miles
         System.out.println("*** Client avec carte Air Miles - paiement débit ***");
-        BigDecimal montant3 = new BigDecimal("101.00"); // création du montant de la facture
-        Facture facture3 = new Facture(montant3, paiementDebit, carteAndy); // on injecte à facture3 BigDecimal montant3, la stratégie de paiement paiementDebit et la carte de fidélité carteAndy
+        double montant3 = 101.00; // création du montant de la facture
+        Facture facture3 = new Facture(montant3, paiementDebit, carteAndy); // on injecte à facture3 le montant, la stratégie de paiement paiementDebit et la carte de fidélité carteAndy
         System.out.println();
 
         // création de l'instance de la classe Facture avec pour stratégie de paiement PaiementCredit et une carte Air Miles
         System.out.println("*** Client avec carte Air Miles - paiement crédit ***");
-        BigDecimal montant4 = new BigDecimal("56.00");
-        Facture facture4 = new Facture(montant4, paiementCredit, carteAndy); // on injecte à facture4 BigDecimal montant4, la stratégie de paiement paiementCredit et la carte de fidélité carteAndy
+        double montant4 = 56.00;
+        Facture facture4 = new Facture(montant4, paiementCredit, carteAndy); // on injecte à facture4 le montant, la stratégie de paiement paiementCredit et la carte de fidélité carteAndy
         System.out.println();
 
         //======================= AVEC LE CONSTRUCTEUR 2 DE LA CLASSE FACTURE ( FACTURES CHÈRES POUR MARILOU) =======================
@@ -57,20 +54,20 @@ public class App {
         // Création de l'instance de la classe Facture avec pour stratégie de paiement PaiementEspeces et une carte Points
         System.out.println("*** Cliente avec carte de Points - paiement espèces ***");
         CartePoints carteMarilou = new CartePoints("Marilou Aiko Fukuyama", "2650, rue Laurier, Montréal");
-        BigDecimal montant5 = new BigDecimal("5000.00"); // Marilou aime dépenser :)
-        Facture facture5 = new Facture(montant5, paiementEspeces, carteMarilou);  // on injecte à facture5 BigDecimal montant5, la stratégie de paiement paiementEspeces et la carte de fidélité carteMarilou
+        double montant5 = 5000.00; // Marilou aime dépenser :)
+        Facture facture5 = new Facture(montant5, paiementEspeces, carteMarilou);  // on injecte à facture5 le montant, la stratégie de paiement paiementEspeces et la carte de fidélité carteMarilou
         System.out.println();
 
         // création de l'instance de la classe Facture avec pour stratégie de paiement PaiementDebit et une carte Points
         System.out.println("*** Cliente avec carte de Points - paiement débit) ***");
-        BigDecimal montant6 = new BigDecimal("75000.00");
-        Facture facture6 = new Facture(montant6, paiementDebit, carteMarilou); // on injecte à facture6 BigDecimal montant6, la stratégie de paiement paiementDebit et la carte de fidélité carteMarilou
+        double montant6 = 75000.00;
+        Facture facture6 = new Facture(montant6, paiementDebit, carteMarilou); // on injecte à facture6 le montant, la stratégie de paiement paiementDebit et la carte de fidélité carteMarilou
         System.out.println();
 
         // Création de l'instance de la classe Facture avec pour stratégie de paiement PaiementCredit et une carte Points
         System.out.println("*** Cliente avec carte de Points - paiement crédit ***");
-        BigDecimal montant7 = new BigDecimal("100000000.00");
-        Facture facture7 = new Facture(montant7, paiementCredit, carteMarilou); // on injecte à facture7 BigDecimal montant7, la stratégie de paiement paiementCredit et la carte de fidélité carteMarilou
+        double montant7 = 100000000.00;
+        Facture facture7 = new Facture(montant7, paiementCredit, carteMarilou); // on injecte à facture7 le montant, la stratégie de paiement paiementCredit et la carte de fidélité carteMarilou
         System.out.println();
 
         //=============================== FACTURE AVEC PAIEMENT PAR POINTS (MARILOU) =======================
@@ -78,8 +75,8 @@ public class App {
         // création de l'instance de la classe Facture avec pour stratégie de paiement PaiementPoint et une carte Points    
         System.out.println("*** Cliente avec carte de Points - paiement par points ***");
         System.out.println("Points avant paiement: " + carteMarilou.getNombre_point()); // getNombre_point est une méthode de la classe CartePoints qui retourne le nombre de points actuels
-        BigDecimal montant8 = new BigDecimal("3700.00");
-        Facture facture8 = new Facture(montant8, paiementPoint, carteMarilou); // on injecte à facture8 BigDecimal montant8, la stratégie de paiement paiementPoint et la carte de fidélité carteMarilou
+        double montant8 = 3700.00;
+        Facture facture8 = new Facture(montant8, paiementPoint, carteMarilou); // on injecte à facture8 le montant, la stratégie de paiement paiementPoint et la carte de fidélité carteMarilou
         System.out.println("Points après paiement: " + carteMarilou.getNombre_point()); // on vient appeler getNombre_point pour afficher le nombre de points restants après le paiement
         System.out.println();
 
@@ -90,3 +87,48 @@ public class App {
     }
 }
 
+
+/*
+Questions :
+1)	La définition de la fonction récompenser(facture f) des cartes clients n’est pas la responsabilité de la carte client. 
+Quel est le principe (parmi les principes SOLID) qui a été violé ? 
+Le principe de responsabilité unique (Single Responsibility Principle - SRP) a été violé. Selon ce principe, 
+une classe ne doit avoir qu'une seule raison de changer, c'est-à-dire qu'elle doit se concentrer sur une seule 
+responsabilité. En définissant la fonction récompenser(facture f) dans la classe carte client, on mélange la 
+responsabilité de gestion des récompenses avec celle de la gestion des informations du client, ce qui complique 
+la maintenance et l'évolution du code.
+
+
+
+
+
+2)	La récompense telle qu’elle a été définit, elle dépend du mode de payement et d’une instance de la classe facture. Quel est le principe qui a été violé et pourquoi ? 
+
+
+
+
+
+
+3)	Si vous déplacez la définition de la récompensassions des carte clients dans la carte facture, vous allez violer un des principes SOLID. Lequel ? 
+
+
+
+
+
+
+
+
+4)	Refaire la conception en respectant les principes Solid et en utilisant le patron de conception «Stratégie». 
+5)	Implémentez la nouvelle conception en utilisant java. 
+6)	Proposez un autre patron de conception (différent de « Stratégie ») qui pourrait améliorer la conception globale de ce système de fidélisation.
+
+Pour le patron choisi :
+a) Nommez le patron et décrivez en quelques phrases le problème de conception qu’il permettrait de résoudre dans ce contexte (par exemple : création d’objets, extension des types de cartes, combinaison de plusieurs comportements, etc.).
+b) Expliquez comment vous l’intégreriez dans votre modèle :
+•	quelles classes existantes seraient impactées ;
+•	quelles nouvelles classes ou interfaces seraient ajoutées ;
+•	quelles responsabilités seraient déplacées ou mieux isolées.
+c) Donnez un exemple concret d’évolution du système (par exemple : ajout d’un nouveau type de carte, d’une règle de récompense spéciale pour certaines périodes, d’un nouveau moyen de paiement, etc.) et expliquez en quoi l’utilisation de ce patron rend cette évolution plus simple et plus conforme aux principes SOLID.
+d) Discutez brièvement des limites ou des coûts de ce patron dans ce contexte 
+
+*/ 

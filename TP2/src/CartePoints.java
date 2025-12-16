@@ -1,6 +1,3 @@
-// BigDecimal vient permettre de gérer les valeurs monétaires avec précision évitant les erreurs d'arrondi avec les float et double.
-import java.math.BigDecimal;
-
 // Création de la classe CartePoints qui hérite de la classe abstraite CarteClient pour les cartes de points
 public class CartePoints extends CarteClient {
     // Attribut privé pour le nombre de points de fidélité
@@ -43,14 +40,14 @@ public class CartePoints extends CarteClient {
         
         // Calculer les points selon la stratégie de paiement
         if (f.getStrategiePaiement() instanceof PaiementEspeces) { // si la stratégie de paiement de Facture est une instance de PaiementEspeces
-            // alors les points gagnés sont calculés en fonction du montant dépensé en espèces (10 points par dollar dépensé)
-            pointsGagnes = (int) (f.getMontant().floatValue() * 10);
+            // les points vaut 1 point pour 1$ dépensé en espèces
+            pointsGagnes = (int) (f.getMontant() * 1);
         } else if (f.getStrategiePaiement() instanceof PaiementDebit) { // sinon si la stratégie de paiement de Facture est une instance de PaiementDebit
-            // alors les points gagnés sont calculés en fonction du montant dépensé par débit (15 points par dollar dépensé)
-            pointsGagnes = (int) (f.getMontant().floatValue() * 15);
+            // les points vaut 1.5 points pour 1$ dépensé en débit
+            pointsGagnes = (int) (f.getMontant() * 1.5);
         } else if (f.getStrategiePaiement() instanceof PaiementCredit) { // sinon si la stratégie de paiement de Facture est une instance de PaiementCredit
-            // alors les points gagnés sont calculés en fonction du montant dépensé par crédit (20 points par dollar dépensé)
-            pointsGagnes = (int) (f.getMontant().floatValue() * 20);
+            // les points vaut 2 points pour 1$ dépensé en crédit
+            pointsGagnes = (int) (f.getMontant() * 2);
         }
         
         // ajouterPoints est une méthode de la classe CartePoints qui ajoute les points gagnés au nombre actuel de points
@@ -58,9 +55,9 @@ public class CartePoints extends CarteClient {
         System.out.println("Récompense: " + pointsGagnes + " points ajoutés. Total: " + nombre_point + " points.");
     }
 
-    // Redéfinition de la méthode recompenser(BigDecimal points) pour récompenser le client avec des points de fidélité basés sur un montant de points
+    // Redéfinition de la méthode recompenser(double montant) pour récompenser le client avec des points de fidélité basés sur un montant
     @Override
-    public void recompenser(BigDecimal points) {
-        ajouterPoints(points.intValue()); // ajoute les points (convertis en int) au nombre actuel de points
+    public void recompenser(double montant) {
+        ajouterPoints((int) montant); // ajoute le montant (converti en int) au nombre actuel de points
     }
 }
